@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>可重复的子项</title>
+</head>
+<body>
+<script>
+	var reg1 = /(\d)\1/g;
+	var reg2 = /(\d)\d/g;
+
+	var str = 23;
+	/*
+	* 也就是说，(\d)第一次匹配到的 2，\1就必须是一模一样 2
+	* 所以，一个 false，一个 true
+	* */
+	console.log(reg1.test(str));	//false
+	console.log(reg2.test(str));	//true
+
+
+	/*
+	* 面试题
+	* 输出指定字符串中，出现最多的字符，及其出现的次数
+	* */
+
+	//先变为数组排序(顺序无关，为了是将相同的放在一起)，再转回字符串
+	var str2 = 'dfsfsfsdsdfddjkddvcddfjsla';
+	var arr = str2.split('');
+	str2 = arr.sort().join('');	//acdddddddddfffffjjklsssssv
+
+	//用于接收是哪个字符，和字符的长度
+	var char = '';
+	var length = 0;
+
+	/*
+	* \w 匹配一个单字字符（字母、数字或者下划线）
+	* \1+ 是为了保证可以将匹配到的单个字符 \w，紧跟着的相同的也一起匹配到
+	* +	匹配前一个表达式，也就是\1  0次或多次。
+	* */
+	var reg3 = /(\w)\1+/g;
+
+	str2.replace(reg3,function ($1,$2) {
+		//因为会隐式迭代，这个判断为了将最大的length获取到，也就是次数最多的。
+		if($1.length > length){
+			length = $1.length;
+			char = $2;
+		}
+	})
+	console.log('出现最多的字符:'+char+'  出现的次数:'+length);
+
+</script>
+</body>
+</html>
