@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script>
+		/*
+		* （1）匹配两个8中间的，任意多个字符
+		* . 任意单个字符
+		* * 0或任意多个，相当于{0，}
+		* （2）因为天生贪婪（量词），也就是说，*会取最大值
+		* 	所以 reg1会从第一个 8开启匹配，一直匹配到最后一个8
+		* */
+		var reg1 = /8.*8/g;
+		var str1="8abc8 8qwe8 8abc".replace(reg1,"h_h");
+		console.log(str1);	//h_habc
+
+        //在量词后，添加？ 就可以将其变惰性
+        var reg2 = /8.*?8/g;
+        var str2="8abc8 8qwe8 8abc".replace(reg2,"h_h");
+        console.log(str2);	//h_h h_h 8abc
+		
+		//这样也可以避免贪婪，两个8之间的，任意非 8的多个字符
+		var reg3 = /8[^8]*8/g;
+		var str3="8abc8 8qwe8 8abc".replace(reg3,"h_h");
+        console.log(str3);	//h_h h_h 8abc
+	</script>
+</html>
