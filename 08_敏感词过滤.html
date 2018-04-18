@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>敏感词过滤</title>
+</head>
+<body>
+	替换前<br>
+	<textarea cols="30" rows="10"></textarea><br>
+	替换后<br>
+	<textarea cols="30" rows="10"></textarea>
+	<input type="button" id="btn" value="点我"></input>
+</body>
+<script>
+	var tts = document.querySelectorAll('textarea');
+	var btn = document.querySelector('#btn');
+	var reg = /66|大熊猫/g
+
+	//因为敏感词的个数不同，对象显示的 * 个数也应该不同。
+	btn.onclick = function () {
+        tts[1].value = tts[0].value.replace(reg,function ($1) {
+            var result = ''
+            for(var i = 0; i < $1.length; i++){
+                result += '*'
+            }
+            return result
+        })
+    }
+
+
+</script>
+</html>

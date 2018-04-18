@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>首尾去空格</title>
+</head>
+<body>
+</body>
+<script>
+	/*
+	* 综下，不能使用 s* 要使用 s+
+	*	因为，无论字符串前有几个空格（包括 0个），都会当一个处理
+	*		字符串后没有空格时，当做一个处理；多个时，都会当做 2个处理
+	*
+	* */
+	var text = '  hi    '
+	function trim(str) {
+		var reg = /^\s*|\s*$/g
+		//replace内部实现，与match匹配相同
+		return str.replace(reg,'$')
+    }
+    // console.log('--'+trim(text)+'--');
+
+
+
+	var t = '     hello '
+    /*
+    * 当字符串前没有空格时，会匹配到空白字符。
+    * 有空格时，数组只会返回一个元素，无论空格的个数。并且不再匹配空白字符
+    * */
+	var reg1 = /^\s*/g
+
+    /*
+    * 当字符串后没有空格时，返回的数组只有一个元素，空白字符。
+    * 有空格时，返回的数组 2个元素，空格（不论个数）和 空白字符
+    * */
+	// var reg1 = /\s*$/g
+	console.log(t.match(reg1))
+</script>
+</html>
