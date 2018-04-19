@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function getElementsByClassName(parent,tagName,className){
+        var allEls = parent.getElementsByTagName(tagName);
+        var arr=[];
+        //这个className是形参
+        var reg =new RegExp("\\b"+className+"\\b");
+        for(var i=0;i<allEls.length;i++){
+            //这个className不是节点的属性，不是形参！
+            if(reg.test(allEls[i].className)){
+                arr.push(allEls[i]);
+            }
+        }
+        return arr;
+    };
+
+
+    //使用，将document下的所有 class为 li的背景设置为 pink
+    var testEls=getElementsByClassName(document,"li","test");
+    console.log(testEls);
+    for(var i=0;i<testEls.length;i++){
+        testEls[i].style.background="pink";
+    }
+
+</script>
+</body>
+</html>

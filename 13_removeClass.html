@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手动实现removeClass</title>
+</head>
+<body>
+<script>
+    function removeClass(node,className){
+        //这个className是节点的属性，不是形参！
+        if(node.className){
+            var reg=new RegExp("\\b"+className+"\\b");
+            var classes = node.className;
+            node.className=classes.replace(reg,"");
+            if(/^\s*$/g.test(node.className)){
+                node.removeAttribute("class");
+            }
+            /*
+            * 如果这个节点没有class属性
+            * node.className = '' == false
+            */
+        }else{
+            node.removeAttribute("class");
+        }
+    }
+</script>
+</body>
+</html>

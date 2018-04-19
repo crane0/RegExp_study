@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lastIndex</title>
+    <!--
+        前提：只有正则表达式使用了，表示全局检索的 "g" 标志时，该属性才会起作用
+			1.当lastIndex >= 源字符串的长度 || 小于源字符串长度但是匹配失败时
+					reg.test false
+					reg.exec null
+					lastindex 0
+
+			2.当lastIndex小于源字符串的长度
+				如果匹配成功
+					reg.test true
+					reg.exec 封装了当前匹配成功的子字符串的数组
+					lastindex 紧接着当前匹配成功的子字符串的下一个位置
+
+			3.当使用正则实例的方法（test,exec）匹配空白字符串\s{0}时
+				reg.test永远都是 true
+				reg.exec永远都是 ""
+				lastindex不会发生改变
+    -->
+</head>
+<body>
+<script>
+    var reg = /ll/g
+    var str = 'heelloll'
+    console.log(reg.lastIndex)  //0
+    console.log(reg.exec(str))  //ll
+    console.log(reg.lastIndex)  //5
+
+    console.log(reg.exec(str))  //ll
+    console.log(reg.lastIndex)  //8
+
+</script>
+</body>
+</html>

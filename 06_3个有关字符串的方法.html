@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>3个有关字符串的方法</title>
+</head>
+<body>
+</body>
+<script>
+	function first() {
+        var str = 'hhhhh'
+        //这是正则中的，空白字符 /\s{0}/g
+        //如果这样，返回 6个空白字符！！
+        //因为有空白字符 \s{0}g\s{0}g\s{0}g\s{0}g\s{0}g\s{0}g
+        var reg = /h/g
+        /*
+        * split返回一个数组
+        * 	如果参数为空串，则按照空白字符分割。
+        * 		数组中，5个元素，h
+        * 	如果参数就是 h
+        * 		数组中，5个元素，h
+        * 	如果参数在源字符串中找不到(或不传参数)，
+        * 		数组中只有一个元素，就是该字符串。
+        * 	如果参数是正则表达式，不需要匹配全局
+        * */
+        // var arr = str.split("h")
+        var arr = str.split(reg)
+        console.log(arr)
+    }
+    first()
+
+	
+	//match方法
+	function second() {
+        var str = 'hh'
+        var reg = /\s{0}/g
+        //将匹配到的放到一个数组中返回。
+        //当使用正则时，必须开启全局
+        var arr = str.match(reg)	//3个空白字符
+        console.log(arr)
+    }
+    second()
+	
+	/*
+	* 简单实现match方法
+	* */
+	function match(str,reg) {
+		var arr = []
+		//如果匹配全局
+		if(reg.global){
+            //reg.exec()返回一个数组（会有其他一些属性）。每调用一次，lastIndex++
+			var flag = reg.exec(str)
+			while (flag){
+                arr.push(flag[0])
+                //这里再次调用，flag就会是新值
+                flag = reg.exec(str)
+			}
+		}else{
+		    arr = reg.exec(str)
+		}
+		return arr
+    }
+
+	/*
+	* replace相比于 match，将匹配到的内容，替换为指定内容。
+	* 返回新字符串。
+	* */
+
+
+</script>
+</html>
